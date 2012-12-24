@@ -1,7 +1,8 @@
 require "easy_shell/version"
+require "easy_shell/core_ext/kernel"
 
 module EasyShell
-  def run(cmd, options = {})
+  def self.run(cmd, options = {})
     defaults = {
       :quiet => false,
       :confirm_first => false,
@@ -41,7 +42,7 @@ module EasyShell
     output
   end
 
-  def confirm(msg)
+  def self.confirm(msg)
     STDOUT << "#{msg} [Yn] "
     response = STDIN.gets.chomp
     response.empty? || !!response.match(/^(y|yes)$/i)
