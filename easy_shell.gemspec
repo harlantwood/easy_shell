@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = EasyShell::VERSION
   gem.authors       = ["Harlan T Wood"]
   gem.email         = ["code@harlantwood.net"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Execute shell commands, with options like verbose output, confirm first, and continue or stop on failure}
+  gem.summary       = gem.description
+  gem.homepage      = "https://github.com/harlantwood/easy_shell"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
