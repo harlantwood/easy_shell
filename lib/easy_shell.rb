@@ -7,7 +7,6 @@ module EasyShell
       :quiet => false,
       :confirm_first => false,
       :continue_on_failure => false,
-      :return_result => false
     }
     unknown_options = options.keys - defaults.keys
     raise "Unknown options #{unknown_options.inspect}" unless unknown_options.empty?
@@ -19,15 +18,10 @@ module EasyShell
 
     return unless confirm("Execute [Yn]? ") if options[:confirm_first]
 
-    if options[:quiet] || options[:return_result]
-      cmd = "#{cmd} 2>&1"
-      output = `#{cmd}`
-      success = $?.success?
-      puts output if success && !options[:quiet]
-    else
-      success = system(cmd)
-      output = nil # output was already printed by system(...)
-    end
+    output = `#{cmd} 2>&1`
+    success = $?.success?
+    puts output if success && !options[:quiet]
+
     unless success
       if options[:continue_on_failure]
         msg = "Continuing, ignoring error while running #{cmd_sanitized.inspect}"
