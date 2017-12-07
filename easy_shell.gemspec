@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = EasyShell::VERSION
   gem.authors       = ["Harlan T Wood"]
   gem.email         = ["code@harlantwood.net"]
-  gem.description   = %q{Execute shell commands, with options like verbose output, confirm first, and continue or stop on failure}
+  gem.description   = %q{Execute shell commands, with options including verbose output, confirm first, and continue or stop on failure}
   gem.summary       = gem.description
   gem.homepage      = "https://github.com/harlantwood/easy_shell"
 
