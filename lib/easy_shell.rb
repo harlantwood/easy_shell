@@ -1,5 +1,4 @@
 require "easy_shell/version"
-require "easy_shell/core_ext/kernel"
 
 module EasyShell
   def self.run(cmd, options = {})
