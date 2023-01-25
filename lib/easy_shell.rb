@@ -6,6 +6,7 @@ module EasyShell
       :quiet => false,
       :confirm_first => false,
       :continue_on_failure => false,
+      :stdout_only => false,
     }
     unknown_options = options.keys - defaults.keys
     raise "Unknown options #{unknown_options.inspect}" unless unknown_options.empty?
@@ -13,11 +14,14 @@ module EasyShell
     cmd.gsub!(/\s+/, ' ')
     cmd.strip!
     cmd_sanitized = cmd.gsub(%r{(https://[-\w]+:)[-\w]+@}, '\1[password sanitized]@')
-    puts "=> Running #{cmd_sanitized.inspect}\n" unless options[:quiet]
+    puts "---> #{cmd_sanitized}\n" unless options[:quiet]
 
-    return unless confirm("Execute [Yn]? ") if options[:confirm_first]
+    if options[:confirm_first]
+      return unless confirm("Execute?")
+    end
 
-    output = `#{cmd} 2>&1`
+    cmd = "#{cmd} 2>&1" unless options[:stdout_only]
+    output = %x(#{cmd})
     success = $?.success?
     puts output if success && !options[:quiet]
 
